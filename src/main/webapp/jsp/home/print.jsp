@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>print</title>
 </head>
 <body>
+	<h1>하이</h1>
 
+	<div>안녕하세요</div>
 </body>
 </html>

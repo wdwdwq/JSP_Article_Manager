@@ -10,11 +10,11 @@ import java.io.IOException;
 @WebServlet("/home/print")
 public class HomePrintServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.getRequestDispatcher("/jsp/home/print.jsp").forward(request, response);
 	}
+
 }
 
 //		.append(request.getContextPath())
