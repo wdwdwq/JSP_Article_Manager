@@ -31,6 +31,10 @@ int limit = Integer.parseInt(inputLimit);
 	<% for(int i = 1; i <= limit; i++) { %>
         <div style="color: <%= inputColor %>;"> <%= dan %> * <%= i %> = <%= dan * i %></div>
     <% } %>
+    
+    <div>
+	<a href="../article/list">목록</a>
+	</div>
 
 </body>
 </html>
