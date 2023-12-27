@@ -23,18 +23,40 @@ int limit = Integer.parseInt(inputLimit);
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구구단</title>
+<title>main</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: <%= inputColor %>;
+            margin-bottom: 20px;
+        }
+        .multiplication {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: <%= inputColor %>;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #333;
+        }
+        a:hover {
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-	<h1 style="color: <%= inputColor %>;"> == <%=dan%>단 ==</h1>
-	
-	<% for(int i = 1; i <= limit; i++) { %>
-        <div style="color: <%= inputColor %>;"> <%= dan %> * <%= i %> = <%= dan * i %></div>
-    <% } %>
-    
-    <div>
-	<a href="../article/list">목록</a>
-	</div>
+    <h1><img src="article/image/musinsaLogo.png" alt="무신사 로고" /></h1>
 
+    <div>
+        <a href="../article/list">목록</a>
+    </div>
 </body>
 </html>

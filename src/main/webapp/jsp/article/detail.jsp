@@ -16,7 +16,7 @@
 <title>게시물 상세보기</title>
 </head>
 <body>
-	<h1><%= articleMap.get("id") %>게시물 상세보기</h1>
+	<h1><%= articleMap.get("id") %>번 게시물 상세보기</h1>
 	
 	<div>번호 : <%= articleMap.get("id") %></div>
 	<div>작성일 : <%= articleMap.get("regDate") %></div>
@@ -25,6 +25,7 @@
 	
 	<div>
 	<a href="../article/list">목록</a>
+	<a href="/article/delete?id=${articleMap.id}" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
 	</div>
 </body>
 </html>
