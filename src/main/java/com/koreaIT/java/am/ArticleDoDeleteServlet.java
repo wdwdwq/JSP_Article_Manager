@@ -13,51 +13,43 @@ import java.sql.SQLException;
 import com.koreaIT.example.JAM.util.DBUtil;
 import com.koreaIT.example.JAM.util.SecSql;
 
-@WebServlet("/article/delete")
+@WebServlet("/article/doDelete")
 public class ArticleDoDeleteServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String deleteId = request.getParameter("id");
-
-        if (deleteId != null) {
-            Connection conn = null;
-            try {
-            	Class.forName("com.mysql.cj.jdbc.Driver");
-    			String url = "jdbc:mysql://127.0.0.1:3306/JSPAM?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull";
-    			conn = DriverManager.getConnection(url, "root", "");
-
-                int articleId = Integer.parseInt(deleteId);
-                SecSql deleteSql = new SecSql();
-                deleteSql.append("DELETE FROM article");
-                deleteSql.append("WHERE id = ?", articleId);
-
-                int affectedRows = DBUtil.update(conn, deleteSql);
-
-                if (affectedRows > 0) {
-                    // 삭제 성공 시 list.jsp로 리다이렉트
-                    response.sendRedirect(request.getContextPath() + "/article/list");
-                    return;
-                } else {
-                    // 삭제 실패 처리
-                }
-            } catch (ClassNotFoundException e) {
-                System.out.println("드라이버 로딩 실패");
-            } catch (SQLException e) {
-                System.out.println("에러: " + e);
-            } finally {
-                try {
-                    if (conn != null && !conn.isClosed()) {
-                        conn.close();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        // 삭제 실패 또는 ID가 없는 경우 detail.jsp로 리다이렉트
-        response.sendRedirect(request.getContextPath() + "/article/detail?id=" + deleteId);
-    }
+	private static final long serialVersionUID = 1L;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("text/html; charset=UTF-8;");
+		
+		Connection conn = null;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url = "jdbc:mysql://127.0.0.1:3306/JSPAM?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull";
+			conn = DriverManager.getConnection(url, "root", "");
+			
+			int id = Integer.parseInt(request.getParameter("id"));
+			
+			SecSql sql = SecSql.from("DELETE FROM article");
+			sql.append("WHERE id = ?", id);
+			
+			DBUtil.delete(conn, sql);
+			
+			response.getWriter().append(String.format("<script>alert('%d번 글을 삭제했습니다'); location.replace('list');</script>", id));
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		} catch (SQLException e) {
+			System.out.println("에러: " + e);
+		} finally {
+			try {
+				if (conn != null && !conn.isClosed()) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 }

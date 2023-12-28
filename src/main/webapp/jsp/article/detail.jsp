@@ -1,7 +1,5 @@
-<%@page import="java.time.format.DateTimeFormatter"%>
-<%@page import="java.text.DateFormat"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="java.util.Map"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -24,8 +22,8 @@
 	<div>내용 : <%= articleMap.get("body") %></div>
 	
 	<div>
-	<a href="../article/list">목록</a>
-	<a href="/article/delete?id=${articleMap.id}" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+		<a href="list">목록</a>
+		<a href="doDelete?id=<%= articleMap.get("id") %>">삭제</a>
 	</div>
 </body>
 </html>
