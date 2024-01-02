@@ -15,18 +15,19 @@
 </head>
 <body>
 	<h1><%= articleMap.get("id") %>번 게시물 상세보기</h1>
+	
 	<table border="1">
 		<colgroup>
-		<col />
-		<col width="200"/>
+			<col />
+			<col width="200"/>
 		</colgroup>
 		<tr>
 			<th>번호</th>
-			<th><%= articleMap.get("id") %></th>
+			<td><%= articleMap.get("id") %></td>
 		</tr>
 		<tr>
 			<th>작성일</th>
-			<td<%= articleMap.get("regDate") %>></td>
+			<td><%= articleMap.get("regDate") %></td>
 		</tr>
 		<tr>
 			<th>제목</th>
@@ -36,11 +37,11 @@
 			<th>내용</th>
 			<td><%= articleMap.get("body") %></td>
 		</tr>
-	</table>	
+	</table>
 	
 	<div>
 		<a href="list">목록</a>
-		<a href="doDelete?id=<%= articleMap.get("id") %>">삭제</a>
+		<a href="modify?id=<%= articleMap.get("id") %>">수정</a>
 	</div>
 </body>
 </html>
