@@ -21,6 +21,10 @@
 	
 	<h1>게시물 목록</h1>
 	
+	<div>
+		<a href="write">글쓰기</a>
+	</div>
+	
 	<table border="1">
 		<colgroup>
 			<col />
