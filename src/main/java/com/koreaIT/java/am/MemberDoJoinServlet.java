@@ -14,8 +14,8 @@ import com.koreaIT.example.JAM.util.DBUtil;
 import com.koreaIT.example.JAM.util.SecSql;
 import com.koreaIT.java.am.config.Config;
 
-@WebServlet("/article/doModify")
-public class ArticleDoModifyServlet extends HttpServlet {
+@WebServlet("/member/doJoin")
+public class MemberDoJoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -29,19 +29,20 @@ public class ArticleDoModifyServlet extends HttpServlet {
 			Class.forName(Config.getDBDriverName());
 			conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBUser(), Config.getDBPassword());
 			
-			String title = request.getParameter("title");
-			String body = request.getParameter("body");
-			int id = Integer.parseInt(request.getParameter("id"));
+			String loginId = request.getParameter("loginId");
+			String loginPw = request.getParameter("loginPw");
+			String name = request.getParameter("name");
 			
-			SecSql sql = SecSql.from("UPDATE article");
-			sql.append("SET updateDate = NOW()");
-			sql.append(", title = ?", title);
-			sql.append(", `body` = ?", body);
-			sql.append("WHERE id = ?", id);
+			SecSql sql = SecSql.from("INSERT INTO `member`");
+			sql.append("SET regDate = NOW()");
+			sql.append(", updateDate = NOW()");
+			sql.append(", loginId = ?", loginId);
+			sql.append(", loginPw = ?", loginPw);
+			sql.append(", `name` = ?", name);
 			
-			DBUtil.update(conn, sql);
+			DBUtil.insert(conn, sql);
 			
-			response.getWriter().append(String.format("<script>alert('%d번 글을 수정했습니다'); location.replace('detail?id=%d');</script>", id, id));
+			response.getWriter().append(String.format("<script>alert('%s님이 가입되었습니다'); location.replace('../home/main');</script>", name));
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
