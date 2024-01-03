@@ -17,11 +17,3 @@ public class HomePrintServlet extends HttpServlet {
 
 }
 
-//		.append(request.getContextPath())
-// 여기를 지정을 안해줘서 아직 내 프로젝트 이름으로 들어간다
-
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//
-//		doGet(request, response);
-//	}

@@ -13,6 +13,7 @@ import java.util.Map;
 
 import com.koreaIT.example.JAM.util.DBUtil;
 import com.koreaIT.example.JAM.util.SecSql;
+import com.koreaIT.java.am.config.Config;
 
 @WebServlet("/article/detail")
 public class ArticleDetailServlet extends HttpServlet {
@@ -22,15 +23,14 @@ public class ArticleDetailServlet extends HttpServlet {
 		
 		Connection conn = null;
 		
-		int id = Integer.parseInt(request.getParameter("id"));
-		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://127.0.0.1:3306/JSPAM?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull";
-			conn = DriverManager.getConnection(url, "root", "");
+			Class.forName(Config.getDBDriverName());
+			conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBUser(), Config.getDBPassword());
+			
+			int id = Integer.parseInt(request.getParameter("id"));
 			
 			SecSql sql = SecSql.from("SELECT * FROM article");
-			sql.append("WHERE id = ?",id);
+			sql.append("WHERE id = ?", id);
 			
 			Map<String, Object> articleMap = DBUtil.selectRow(conn, sql);
 			

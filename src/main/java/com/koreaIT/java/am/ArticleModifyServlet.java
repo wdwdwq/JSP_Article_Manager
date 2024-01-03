@@ -13,6 +13,7 @@ import java.util.Map;
 
 import com.koreaIT.example.JAM.util.DBUtil;
 import com.koreaIT.example.JAM.util.SecSql;
+import com.koreaIT.java.am.config.Config;
 
 @WebServlet("/article/modify")
 public class ArticleModifyServlet extends HttpServlet {
@@ -23,9 +24,8 @@ public class ArticleModifyServlet extends HttpServlet {
 		Connection conn = null;
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://127.0.0.1:3306/JSPAM?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull";
-			conn = DriverManager.getConnection(url, "root", "");
+			Class.forName(Config.getDBDriverName());
+			conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBUser(), Config.getDBPassword());
 			
 			int id = Integer.parseInt(request.getParameter("id"));
 			

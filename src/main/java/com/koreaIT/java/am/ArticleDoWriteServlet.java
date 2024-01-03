@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 import com.koreaIT.example.JAM.util.DBUtil;
 import com.koreaIT.example.JAM.util.SecSql;
+import com.koreaIT.java.am.config.Config;
 
 @WebServlet("/article/doWrite")
 public class ArticleDoWriteServlet extends HttpServlet {
@@ -25,9 +26,8 @@ public class ArticleDoWriteServlet extends HttpServlet {
 		Connection conn = null;
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://127.0.0.1:3306/JSPAM?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull";
-			conn = DriverManager.getConnection(url, "root", "");
+			Class.forName(Config.getDBDriverName());
+			conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBUser(), Config.getDBPassword());
 			
 			String title = request.getParameter("title");
 			String body = request.getParameter("body");
@@ -36,7 +36,7 @@ public class ArticleDoWriteServlet extends HttpServlet {
 			sql.append("SET regDate = NOW()");
 			sql.append(", updateDate = NOW()");
 			sql.append(", title = ?", title);
-			sql.append(", body = ?", body);
+			sql.append(", `body` = ?", body);
 			
 			int id = DBUtil.insert(conn, sql);
 			
