@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -32,9 +34,12 @@ public class ArticleDoWriteServlet extends HttpServlet {
 			String title = request.getParameter("title");
 			String body = request.getParameter("body");
 			
+			HttpSession session = request.getSession();
+			
 			SecSql sql = SecSql.from("INSERT INTO article");
 			sql.append("SET regDate = NOW()");
 			sql.append(", updateDate = NOW()");
+			sql.append(", memberId = ?", (int) session.getAttribute("loginedMemberId"));
 			sql.append(", title = ?", title);
 			sql.append(", `body` = ?", body);
 			
