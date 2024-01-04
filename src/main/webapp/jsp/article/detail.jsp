@@ -30,6 +30,10 @@
 			<td><%= articleMap.get("regDate") %></td>
 		</tr>
 		<tr>
+			<th>작성자</th>
+			<td><%= articleMap.get("writerName") %></td>
+		</tr>
+		<tr>
 			<th>제목</th>
 			<td><%= articleMap.get("title") %></td>
 		</tr>
@@ -42,7 +46,7 @@
 	<div>
 		<a href="list">목록</a>
 		<a href="modify?id=<%= articleMap.get("id") %>">수정</a>
-		<a href="doDelete?id=<%= articleMap.get("id")%>" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
+		<a href="doDelete?id=<%= articleMap.get("id") %>" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
 	</div>
 </body>
 </html>
